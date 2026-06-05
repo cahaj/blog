@@ -1,0 +1,35 @@
+baseURL: "https://jiri.caha.cloud/"
+title: jiri.caha.cloud
+locale: en-us
+theme: [PaperMod]
+
+params:
+  profileMode:
+    enabled: true
+    title: "Jiří Caha" # optional default will be site title
+    subtitle: "Welcome to my blog! Here you can learn something [about me](/aboutme) and [my work](/posts). Despite the vast majority of my posts being about LLMs, I still write them by myself like Shakespeare did in the 16th century."
+    imageUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia1.tenor.com%2Fimages%2Fbbb92fe330c082c0d289da72fb2277bc%2Ftenor.gif%3Fitemid%3D17592134&f=1&nofb=1&ipt=bae1959e2481dbcfad79c70f4c1e4d561a94f9249de04d714a6c242253ec4b36" # optional
+    imageTitle: "The horses don't stop they keep goin" # optional
+    imageWidth: 120 # custom size
+    imageHeight: 120 # custom size
+
+  socialIcons: # optional
+    - name: github
+      url: "https://github.com/cahaj"
+    - name: "email"
+      url: "mailto:jiri@caha.cloud"
+  ShowAllPagesInArchive: true
+  hideFooter: true
+
+
+menu:
+  main:
+    - name: About me
+      url: "/aboutme/"
+      weight: 8
+    - name: Posts
+      url: "/posts/"
+      weight: 9
+    - name: Archive
+      url: "/archive/"
+      weight: 10

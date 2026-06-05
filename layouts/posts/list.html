@@ -1,0 +1,101 @@
+{{- define "main" }}
+
+{{- if .Content }}
+<div class="post-content">
+  {{- .Content }}
+</div>
+{{- end }}
+
+{{- /* Grab all regular pages in this section */ -}}
+{{- $pages := .RegularPages }}
+
+{{- /* ======================================================= */ -}}
+{{- /* 1. FEATURED POSTS SECTION                               */ -}}
+{{- /* ======================================================= */ -}}
+{{- $featured := where $pages "Params.featured" true }}
+
+{{- if gt (len $featured) 0 }}
+<div class="featured-posts-section">
+  <h2 class="list-section-title" style="margin: 40px auto 15px auto; max-width: calc(var(--main-width) + var(--gap) * 2); padding: 0 var(--gap); font-size: 1.8rem; padding-bottom: 8px;">
+    Featured Articles
+  </h2>
+  
+  {{- range $featured }}
+  <article class="post-entry featured-entry" style="border-left: 4px solid #f1c40f;">
+    {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+    {{- partial "cover.html" (dict "cpage" . "isHidden" $isHidden) }}
+    
+    <header class="entry-header">
+      <h2 class="entry-hint-parent">{{ .Title }}</h2>
+    </header>
+    
+    {{- if (ne (.Param "hideSummary") true) }}
+    <div class="entry-content">
+      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+    </div>
+    {{- end }}
+    
+    {{- if not (.Param "hideMeta") }}
+    <footer class="entry-footer">{{ partial "post_meta.html" . }}</footer>
+    {{- end }}
+    
+    <a class="entry-link" aria-label="post link to {{ .Title }}" href="{{ .Permalink }}"></a>
+  </article>
+  {{- end }}
+</div>
+{{- end }}
+
+
+{{- /* ======================================================= */ -}}
+{{- /* 2. RECENT POSTS SECTION                                 */ -}}
+{{- /* ======================================================= */ -}}
+{{- /* Filter out featured posts so they don't show up twice */ -}}
+{{- $recent := where $pages "Params.featured" "!=" true }}
+{{- $paginator := .Paginate $recent }}
+
+{{- if gt (len $paginator.Pages) 0 }}
+<div class="recent-posts-section" style="margin-top: 50px;">
+  <h2 class="list-section-title" style="margin: 20px auto 15px auto; max-width: calc(var(--main-width) + var(--gap) * 2); padding: 0 var(--gap); font-size: 1.8rem;">
+    Recent Feed
+  </h2>
+  
+  {{- range $paginator.Pages }}
+  <article class="post-entry">
+    {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+    {{- partial "cover.html" (dict "cpage" . "isHidden" $isHidden) }}
+    
+    <header class="entry-header">
+      <h2 class="entry-hint-parent">{{ .Title }}</h2>
+    </header>
+    
+    {{- if (ne (.Param "hideSummary") true) }}
+    <div class="entry-content">
+      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+    </div>
+    {{- end }}
+    
+    {{- if not (.Param "hideMeta") }}
+    <footer class="entry-footer">{{ partial "post_meta.html" . }}</footer>
+    {{- end }}
+    
+    <a class="entry-link" aria-label="post link to {{ .Title }}" href="{{ .Permalink }}"></a>
+  </article>
+  {{- end }}
+</div>
+{{- end }}
+
+{{- /* Pagination Control footer */ -}}
+{{- if gt $paginator.TotalPages 1 }}
+<footer class="page-footer">
+  <nav class="pagination">
+    {{- if $paginator.HasPrev }}
+    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">« {{- i18n "prev_page" | default "Prev" }}</a>
+    {{- end }}
+    {{- if $paginator.HasNext }}
+    <a class="next" href="{{ $paginator.Next.URL | absURL }}">{{- i18n "next_page" | default "Next" }} »</a>
+    {{- end }}
+  </nav>
+</footer>
+{{- end }}
+
+{{- end }}
