@@ -20,8 +20,9 @@ params:
       url: "mailto:jiri@caha.cloud"
   ShowAllPagesInArchive: true
   hideFooter: true
-
-
+caches:
+  images:
+    dir: :cacheDir/images
 menu:
   main:
     - name: About me
