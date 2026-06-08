@@ -12,7 +12,8 @@ params:
     imageTitle: "The horses don't stop they keep goin" # optional
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
-
+    ShowReadingTime: true
+    ShowWordCount: true
   socialIcons: # optional
     - name: github
       url: "https://github.com/cahaj"
