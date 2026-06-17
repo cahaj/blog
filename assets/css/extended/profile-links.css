@@ -1,11 +1,11 @@
-.profile-mode .profile-info a {
+.profile_inner span a {
     color: var(--primary);
     text-decoration: underline;
     text-underline-offset: 3px;
     transition: color 0.2s ease;
 }
 
-.profile-mode .profile-info a:hover {
+.profile_inner span a:hover {
     color: var(--secondary);
     text-decoration: none;
 }
