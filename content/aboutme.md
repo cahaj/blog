@@ -1,4 +1,8 @@
-# About me
+---
+title: "About me"
+ShowReadingTime: false
+ShowWordCount: false
+---
 
 Hi! My name is Jiří, and I am a student from Czechia, currently studying Information Technology at the Faculty of Informatics at Brno University of Technology.
 
