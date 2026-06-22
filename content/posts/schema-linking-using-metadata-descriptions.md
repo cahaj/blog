@@ -4,7 +4,6 @@ draft: false
 title: 'Schema Linking for Text-to-SQL using LLM-generated Metadata Descriptions'
 featured: false
 ---
-# Schema Linking for Text-to-SQL using LLM-generated Metadata Descriptions
 While building an LLM-powered [Text-to-SQL framework](/posts/text-to-sql-intro/), many developers encounter a fundamental issue when scaling into production databases: it is not scalable to pass the whole database schema to the LLM prompt and expect the LLM to handle the sheer volume of data. Not only do models have limited context windows, but even those with a large enough one will eventually struggle to make sense of the database schema and distinguish which columns or tables are actually relevant to the user's question.
 
 ## Schema Linking
@@ -64,7 +63,7 @@ This then gets passed to the LLM to create a semantically rich description based
 ```
 Serves as the unique, system-generated surrogate identifier for each distinct academic term record within the ACADEMIC_TERMS dimension table. This column is fully populated across all 144 rows with zero NULLs and exhibits 100% uniqueness, making it the definitive primary key for this entity. The values are strictly formatted as a fixed 6-character composite code that concatenates a 4-digit calendar year with a 2-character season or session abbreviation (e.g., 'FA' for Fall, 'SP' for Spring, 'SU' for Summer, 'JA' for January term). This column is the primary target for JOIN operations when linking fact tables (such as enrollments or course offerings) to their specific term context, and it should be used in SQL generation whenever a query requires precise term-level granularity or needs to traverse relationships anchored to a specific academic period.
 ```
-_(generated with Deepseek-V4-Pro)_
+_<small>(generated with Deepseek-V4-Pro)</small>_
 
 While the descriptions may not always be perfect, they are semantically rich, exactly what is needed for the next step: upserting them into a vector database. When the user asks a question, the N most similar descriptions to the user's question are found and are retrieved along with their metadata, like table name or column name, as relevant to the user's question.
 
